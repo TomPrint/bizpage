@@ -44,8 +44,9 @@ export const translations: Record<string, Record<Locale, string>> = {
   'home.services.item3':    { pl: 'panele administracyjne', en: 'admin panels' },
   'home.services.item4':    { pl: 'portale klienta', en: 'client portals' },
   'home.services.item5':    { pl: 'platformy SaaS', en: 'SaaS platforms' },
-  'home.services.item6':    { pl: 'integracje z ERP, CRM i zewnętrznymi API', en: 'ERP, CRM and external API integrations' },
-  'home.services.item7':    { pl: 'automatyzację procesów biznesowych', en: 'business process automation' },
+  'home.services.item6':    { pl: 'modele AI i Machine Learning', en: 'AI models and Machine Learning' },
+  'home.services.item7':    { pl: 'integracje z ERP, CRM i zewnętrznymi API', en: 'ERP, CRM and external API integrations' },
+  'home.services.item8':    { pl: 'automatyzację procesów biznesowych', en: 'business process automation' },
 
   // Kiedy gotowe systemy przestają wystarczyć
   'home.why.title':   { pl: 'Kiedy gotowe systemy przestają wystarczyć', en: 'When off-the-shelf systems stop being enough' },
@@ -130,5 +131,71 @@ export const translations: Record<string, Record<Locale, string>> = {
   'footer.copy': {
     pl: 'WickyWave Software. Nowoczesne produkty dla nowoczesnych firm.',
     en: 'WickyWave Software. Modern products for modern companies.'
+  },
+  'footer.privacyLink': { pl: 'Polityka prywatności', en: 'Privacy policy' },
+  'footer.cookieSettings': { pl: 'Ustawienia cookie', en: 'Cookie settings' },
+
+  // ── COOKIE BANNER (zgodny z RODO/UE, zgody granularne) ──────────────────
+  'cookie.text': {
+    pl: 'Ta strona wykorzystuje pliki cookie niezbędne do jej działania. Za Twoją zgodą używamy również opcjonalnych plików cookie analitycznych. Możesz zaakceptować wszystkie, odrzucić opcjonalne lub dostosować swój wybór.',
+    en: 'This site uses cookies required for it to function. With your consent, we also use optional analytics cookies. You can accept all, decline the optional ones, or customize your choice.'
+  },
+  'cookie.accept': { pl: 'Akceptuję wszystkie', en: 'Accept all' },
+  'cookie.decline': { pl: 'Odrzuć opcjonalne', en: 'Decline optional' },
+  'cookie.manage': { pl: 'Dostosuj', en: 'Customize' },
+  'cookie.save': { pl: 'Zapisz preferencje', en: 'Save preferences' },
+  'cookie.policyLink': { pl: 'Polityka prywatności', en: 'Privacy policy' },
+  'cookie.prefsTitle': { pl: 'Ustawienia plików cookie', en: 'Cookie settings' },
+  'cookie.prefsDesc': {
+    pl: 'Wybierz, na jakie kategorie plików cookie wyrażasz zgodę. Swój wybór możesz zmienić w każdej chwili w stopce strony.',
+    en: 'Choose which categories of cookies you consent to. You can change your choice at any time from the site footer.'
+  },
+  'cookie.necessary.title': { pl: 'Niezbędne', en: 'Necessary' },
+  'cookie.necessary.desc': {
+    pl: 'Zawsze aktywne. Wymagane do podstawowego działania strony (np. zapamiętanie Twojej zgody).',
+    en: 'Always active. Required for the site\'s basic operation (e.g. remembering your consent choice).'
+  },
+  'cookie.analytics.title': { pl: 'Analityczne', en: 'Analytics' },
+  'cookie.analytics.desc': {
+    pl: 'Pomagają nam zrozumieć, jak odwiedzający korzystają ze strony, abyśmy mogli ją ulepszać. Wymagają Twojej zgody.',
+    en: 'Help us understand how visitors use the site so we can improve it. Require your consent.'
+  },
+
+  // ── POLITYKA PRYWATNOŚCI ─────────────────────────────────────────────────
+  'privacy.title': { pl: 'Polityka prywatności', en: 'Privacy policy' },
+  'privacy.updated': { pl: 'Ostatnia aktualizacja: wrzesień 2026', en: 'Last updated: September 2026' },
+  'privacy.intro': {
+    pl: 'Szanujemy Twoją prywatność. Ta polityka wyjaśnia, jakie dane zbieramy, w jakim celu je przetwarzamy oraz jakie prawa przysługują Ci na mocy ogólnego rozporządzenia o ochronie danych (RODO/GDPR).',
+    en: 'We respect your privacy. This policy explains what data we collect, why we process it, and what rights you have under the General Data Protection Regulation (GDPR).'
+  },
+  'privacy.section1.title': { pl: '1. Administrator danych', en: '1. Data controller' },
+  'privacy.section1.body': {
+    pl: 'Administratorem danych osobowych zbieranych za pośrednictwem tej strony jest WickyWave Software. W sprawach dotyczących ochrony danych możesz skontaktować się z nami pod adresem hello@wickywave.wicky.',
+    en: 'The controller of personal data collected through this site is WickyWave Software. For any data protection matters, you can contact us at hello@wickywave.wicky.'
+  },
+  'privacy.section2.title': { pl: '2. Jakie dane zbieramy', en: '2. What data we collect' },
+  'privacy.section2.body': {
+    pl: 'Zbieramy dane, które przekazujesz nam samodzielnie (np. adres e-mail podczas kontaktu) oraz podstawowe dane techniczne generowane automatycznie podczas przeglądania strony (np. typ przeglądarki, orientacyjna lokalizacja, statystyki odwiedzin).',
+    en: 'We collect data you provide directly (e.g. your email address when contacting us) and basic technical data generated automatically while browsing the site (e.g. browser type, approximate location, visit statistics).'
+  },
+  'privacy.section3.title': { pl: '3. Pliki cookie', en: '3. Cookies' },
+  'privacy.section3.body': {
+    pl: 'Strona wykorzystuje niezbędne pliki cookie (zawsze aktywne) oraz opcjonalne pliki cookie analityczne, które są włączane wyłącznie po wyrażeniu przez Ciebie zgody. Zgodę możesz udzielić, odrzucić lub dostosować granularnie w banerze cookie, a także zmienić ją w dowolnym momencie klikając „Ustawienia cookie” w stopce strony.',
+    en: 'The site uses necessary cookies (always active) and optional analytics cookies, which are only enabled after you give consent. You can grant, decline, or granularly customize consent in the cookie banner, and change it at any time by clicking "Cookie settings" in the site footer.'
+  },
+  'privacy.section4.title': { pl: '4. Cel przetwarzania danych', en: '4. Purpose of processing' },
+  'privacy.section4.body': {
+    pl: 'Przetwarzamy dane w celu odpowiedzi na zapytania kontaktowe, zapewnienia prawidłowego działania strony oraz — na podstawie Twojej zgody — analizy ruchu w celu poprawy jakości serwisu.',
+    en: 'We process data in order to respond to contact requests, ensure the site functions correctly, and — based on your consent — analyze traffic to improve the quality of the service.'
+  },
+  'privacy.section5.title': { pl: '5. Twoje prawa (RODO/GDPR)', en: '5. Your rights (GDPR)' },
+  'privacy.section5.body': {
+    pl: 'Masz prawo dostępu do swoich danych, ich sprostowania, usunięcia, ograniczenia przetwarzania, przenoszenia danych oraz wniesienia sprzeciwu wobec przetwarzania. Masz również prawo do cofnięcia zgody w dowolnym momencie oraz wniesienia skargi do organu nadzorczego.',
+    en: 'You have the right to access, rectify, erase, restrict processing, transfer your data, and object to processing. You may also withdraw your consent at any time and lodge a complaint with a supervisory authority.'
+  },
+  'privacy.section6.title': { pl: '6. Kontakt', en: '6. Contact' },
+  'privacy.section6.body': {
+    pl: 'W sprawie realizacji swoich praw lub jakichkolwiek pytań dotyczących niniejszej polityki napisz do nas: hello@wickywave.wicky.',
+    en: 'To exercise your rights or ask any questions about this policy, contact us at: hello@wickywave.wicky.'
   }
 };

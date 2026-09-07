@@ -134,7 +134,7 @@
         </div>
         <button
           type="button"
-          class="text-slate-300"
+          class="mobile-close-btn"
           (click)="closeMobileMenu()"
           aria-label="Close mobile menu"
         >
@@ -142,7 +142,7 @@
         </button>
       </div>
 
-      <div class="mt-10 grid gap-3">
+      <div class="mobile-nav-list">
         <a
           *ngFor="let item of navItems"
           [routerLink]="item.scrollTarget ? null : item.path"
@@ -154,7 +154,7 @@
         </a>
       </div>
 
-      <div class="mt-8 flex gap-2">
+      <div class="mobile-actions">
         <button
           class="locale-btn w-1/2"
           [class.locale-btn-active]="locale() === 'pl'"
@@ -204,6 +204,12 @@
 
     <div class="relative mx-auto max-w-6xl text-white">
       {{ t("footer.copy") }}
+      <a routerLink="/privacy-policy" class="footer-privacy-link">{{ t("footer.privacyLink") }}</a>
+      <button type="button" class="footer-privacy-link footer-cookie-btn" (click)="openCookiePreferences()">
+        {{ t("footer.cookieSettings") }}
+      </button>
     </div>
   </footer>
+
+  <app-cookie-banner></app-cookie-banner>
 </div>

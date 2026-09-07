@@ -1,13 +1,15 @@
 import { NgFor, isPlatformBrowser } from '@angular/common';
 import { Component, inject, signal, PLATFORM_ID } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { CookieBannerComponent } from './cookie-banner.component';
+import { CookieConsentService } from './cookie-consent.service';
 import { I18nService } from './i18n/i18n.service';
 import type { Locale } from './i18n/translations';
 import { OceanBannerComponent } from './ocean-banner.component';
 
 @Component({
   selector: 'app-root',
-  imports: [NgFor, RouterLink, RouterLinkActive, RouterOutlet, OceanBannerComponent],
+  imports: [NgFor, RouterLink, RouterLinkActive, RouterOutlet, OceanBannerComponent, CookieBannerComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -15,6 +17,7 @@ export class App {
   private readonly i18n = inject(I18nService);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly router = inject(Router);
+  private readonly cookieConsent = inject(CookieConsentService);
 
   protected readonly isMobileMenuOpen = signal(false);
   protected readonly timeOfDay = signal(0.28);
@@ -78,6 +81,10 @@ export class App {
 
   protected toggleDarkMode(): void {
     this.darkModeManual.set(!this.isDarkMode());
+  }
+
+  protected openCookiePreferences(): void {
+    this.cookieConsent.openPreferences();
   }
 
   protected pageBackground(): string {

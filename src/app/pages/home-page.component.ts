@@ -426,7 +426,8 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
 
   readonly serviceItems = [
     'home.services.item1', 'home.services.item2', 'home.services.item3',
-    'home.services.item4', 'home.services.item5', 'home.services.item6', 'home.services.item7'
+    'home.services.item4', 'home.services.item5', 'home.services.item6',
+    'home.services.item7', 'home.services.item8'
   ];
 
   readonly whyItems = [

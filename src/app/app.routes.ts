@@ -4,6 +4,7 @@ import { ContactPageComponent } from './pages/contact-page.component';
 import { HomePageComponent } from './pages/home-page.component';
 import { NewsPageComponent } from './pages/news-page.component';
 import { OfferPageComponent } from './pages/offer-page.component';
+import { PrivacyPageComponent } from './pages/privacy-page.component';
 import { XoailaPageComponent } from './pages/xoaila-page.component';
 
 export const routes: Routes = [
@@ -14,5 +15,6 @@ export const routes: Routes = [
 	{ path: 'about-us', component: AboutPageComponent },
 	{ path: 'news', component: NewsPageComponent },
 	{ path: 'contact', component: ContactPageComponent },
+	{ path: 'privacy-policy', component: PrivacyPageComponent },
 	{ path: '**', redirectTo: 'home' }
 ];
