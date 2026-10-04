@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { I18nService } from '../i18n/i18n.service';
+import { SeoService } from '../seo.service';
 
 @Component({
   selector: 'app-privacy-page',
@@ -92,6 +93,14 @@ import { I18nService } from '../i18n/i18n.service';
 })
 export class PrivacyPageComponent {
   private readonly i18n = inject(I18nService);
+  private readonly seo = inject(SeoService);
+
+  constructor() {
+    this.seo.updateTags({
+      title: this.t('seo.privacy.title'),
+      description: this.t('seo.privacy.description')
+    });
+  }
 
   t(key: string): string {
     return this.i18n.t(key);

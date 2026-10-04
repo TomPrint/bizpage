@@ -6,6 +6,7 @@ import { CookieConsentService } from './cookie-consent.service';
 import { I18nService } from './i18n/i18n.service';
 import type { Locale } from './i18n/translations';
 import { OceanBannerComponent } from './ocean-banner.component';
+import { SeoService, SITE_URL, SITE_NAME } from './seo.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class App {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly router = inject(Router);
   private readonly cookieConsent = inject(CookieConsentService);
+  private readonly seo = inject(SeoService);
 
   protected readonly isMobileMenuOpen = signal(false);
   protected readonly timeOfDay = signal(0.28);
@@ -29,6 +31,25 @@ export class App {
     { path: '/aktywne-saas', label: 'menu.activeSaas' },
     { path: '/contact',      label: 'menu.contact' }
   ];
+
+  constructor() {
+    this.seo.setJsonLd('organization', {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+      email: 'hello@wickywave.wicky',
+      description:
+        'Software house tworzący dedykowane aplikacje webowe, panele administracyjne i systemy wewnętrzne.'
+    });
+
+    this.seo.setJsonLd('website', {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: SITE_NAME,
+      url: SITE_URL
+    });
+  }
 
   protected t(key: string): string {
     return this.i18n.t(key);

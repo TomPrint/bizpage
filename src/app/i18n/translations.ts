@@ -2,6 +2,44 @@ export type Locale = 'pl' | 'en';
 
 export const translations: Record<string, Record<Locale, string>> = {
   'brand.name': { pl: 'WickyWave Software', en: 'WickyWave Software' },
+
+  // ── SEO: tytuły i meta-opisy (title ≤60 znaków, description ≤160 znaków) ──
+  'seo.home.title': { pl: 'WickyWave Software — dedykowane aplikacje webowe dla firm', en: 'WickyWave Software — Custom Web Applications for Businesses' },
+  'seo.home.description': {
+    pl: 'Projektujemy i wdrażamy dedykowane aplikacje B2B, panele administracyjne i systemy wewnętrzne oparte na Django, Angular i nowoczesnych API.',
+    en: 'We design and build custom B2B applications, admin panels and internal systems powered by Django, Angular and modern APIs.'
+  },
+  'seo.offer.title': { pl: 'Oferta — aplikacje webowe, panele i automatyzacja | WickyWave', en: 'Offer — Web Apps, Admin Panels & Automation | WickyWave' },
+  'seo.offer.description': {
+    pl: 'Aplikacje webowe B2B/B2C, panele administracyjne, automatyzacja procesów, integracje API oraz opieka powdrożeniowa.',
+    en: 'B2B/B2C web applications, admin panels, process automation, API integrations and post-launch support.'
+  },
+  'seo.about.title': { pl: 'O nas — software house WickyWave', en: 'About us — WickyWave software house' },
+  'seo.about.description': {
+    pl: 'Software house IT zorientowany na rezultat — łączymy technologię, design i analitykę, aby poprawiać wyniki biznesowe klientów.',
+    en: 'An outcome-focused IT software house — we combine technology, design and analytics to improve our clients\' business results.'
+  },
+  'seo.news.title': { pl: 'Aktualności — case studies i poradniki | WickyWave', en: 'News — case studies & guides | WickyWave' },
+  'seo.news.description': {
+    pl: 'Case studies, praktyczne poradniki i aktualności o trendach produktowych od zespołu WickyWave Software.',
+    en: 'Case studies, practical guides and product trend updates from the WickyWave Software team.'
+  },
+  'seo.contact.title': { pl: 'Kontakt — porozmawiajmy o Twoim projekcie | WickyWave', en: 'Contact — let\'s talk about your project | WickyWave' },
+  'seo.contact.description': {
+    pl: 'Napisz do nas, aby omówić swój projekt. Odpowiadamy zwykle w ciągu jednego dnia roboczego.',
+    en: 'Reach out to discuss your project. We usually reply within one business day.'
+  },
+  'seo.privacy.title': { pl: 'Polityka prywatności | WickyWave Software', en: 'Privacy policy | WickyWave Software' },
+  'seo.privacy.description': {
+    pl: 'Dowiedz się, jak WickyWave Software przetwarza dane osobowe i pliki cookie zgodnie z RODO.',
+    en: 'Learn how WickyWave Software processes personal data and cookies in compliance with GDPR.'
+  },
+  'seo.xoaila.title': { pl: 'Xoaila — aktywny SaaS do pozycjonowania w AI | WickyWave', en: 'Xoaila — active SaaS for AI search visibility | WickyWave' },
+  'seo.xoaila.description': {
+    pl: 'Xoaila pomaga markom budować widoczność w nowym modelu wyszukiwania: od klasycznego SEO po odpowiedzi generowane przez AI.',
+    en: 'Xoaila helps brands build visibility in the new search model: from classic SEO to AI-generated answer surfaces.'
+  },
+
   'menu.home': { pl: 'Home', en: 'Home' },
   'menu.activeSaas': { pl: 'Aktywne SaaS', en: 'Active SaaS' },
   'menu.offer': { pl: 'Oferta', en: 'Offer' },

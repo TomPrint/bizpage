@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { I18nService } from '../i18n/i18n.service';
+import { SeoService, SITE_URL } from '../seo.service';
 
 @Component({
   selector: 'app-news-page',
@@ -60,6 +61,27 @@ import { I18nService } from '../i18n/i18n.service';
 })
 export class NewsPageComponent {
   private readonly i18n = inject(I18nService);
+  private readonly seo = inject(SeoService);
+
+  constructor() {
+    this.seo.updateTags({
+      title: this.t('seo.news.title'),
+      description: this.t('seo.news.description')
+    });
+
+    this.seo.setJsonLd('newspage', {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: this.t('seo.news.title'),
+      description: this.t('seo.news.description'),
+      url: `${SITE_URL}/news`,
+      hasPart: [
+        { '@type': 'Article', headline: this.t('news.card1') },
+        { '@type': 'Article', headline: this.t('news.card2') },
+        { '@type': 'Article', headline: this.t('news.card3') }
+      ]
+    });
+  }
 
   t(key: string): string {
     return this.i18n.t(key);

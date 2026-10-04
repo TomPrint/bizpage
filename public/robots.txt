@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Pliki pomocnicze dla wyszukiwarek i modeli AI
+Sitemap: https://wickywave.pl/sitemap.xml

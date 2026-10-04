@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { I18nService } from '../i18n/i18n.service';
+import { SeoService } from '../seo.service';
 
 @Component({
   selector: 'app-about-page',
@@ -35,6 +36,21 @@ import { I18nService } from '../i18n/i18n.service';
 })
 export class AboutPageComponent {
   private readonly i18n = inject(I18nService);
+  private readonly seo = inject(SeoService);
+
+  constructor() {
+    this.seo.updateTags({
+      title: this.t('seo.about.title'),
+      description: this.t('seo.about.description')
+    });
+
+    this.seo.setJsonLd('aboutpage', {
+      '@context': 'https://schema.org',
+      '@type': 'AboutPage',
+      name: this.t('seo.about.title'),
+      description: this.t('seo.about.description')
+    });
+  }
 
   t(key: string): string {
     return this.i18n.t(key);

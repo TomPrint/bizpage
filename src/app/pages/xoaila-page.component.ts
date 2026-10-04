@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { I18nService } from '../i18n/i18n.service';
+import { SeoService } from '../seo.service';
 
 @Component({
   selector: 'app-xoaila-page',
@@ -89,8 +90,25 @@ import { I18nService } from '../i18n/i18n.service';
 })
 export class XoailaPageComponent {
   private readonly i18n = inject(I18nService);
+  private readonly seo = inject(SeoService);
 
   readonly points = ['xoaila.point1', 'xoaila.point2', 'xoaila.point3'];
+
+  constructor() {
+    this.seo.updateTags({
+      title: this.t('seo.xoaila.title'),
+      description: this.t('seo.xoaila.description')
+    });
+
+    this.seo.setJsonLd('softwareapp', {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'Xoaila',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+      description: this.t('seo.xoaila.description')
+    });
+  }
 
   t(key: string): string {
     return this.i18n.t(key);
