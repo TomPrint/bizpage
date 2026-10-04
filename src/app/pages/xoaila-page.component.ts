@@ -1,14 +1,21 @@
 import { Component, inject } from '@angular/core';
 import { NgFor } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { I18nService } from '../i18n/i18n.service';
+import { SeoService } from '../seo.service';
 
 @Component({
   selector: 'app-xoaila-page',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor, RouterLink],
   template: `
     <!-- SEKCJA: Xoaila – opis produktu SaaS + lista punktów -->
     <section class="page-shell">
+      <a class="logo-link" routerLink="/home" aria-label="Xoaila home">
+        <span class="logo-word">xoaila</span>
+        <span class="logo-mark" aria-hidden="true"></span>
+      </a>
+
       <p>{{ t('xoaila.body') }}</p>
 
       <ul>
@@ -22,6 +29,32 @@ import { I18nService } from '../i18n/i18n.service';
         margin: 0 auto;
         max-width: 72rem;
         padding: 3rem 1.5rem 6rem;
+      }
+
+      .logo-link {
+        display: inline-flex;
+        align-items: flex-end;
+        gap: 0.25rem;
+        flex-shrink: 0;
+        text-decoration: none;
+      }
+
+      .logo-word {
+        font-size: clamp(2rem, 4vw, 2.5rem);
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 1;
+        color: #284b63;
+      }
+
+      .logo-mark {
+        display: inline-block;
+        width: 0.625rem;
+        height: 0.625rem;
+        border-radius: 9999px;
+        background: #5ca197;
+        margin-bottom: 0.3rem;
+        flex-shrink: 0;
       }
 
       .page-shell h1 {
@@ -57,8 +90,25 @@ import { I18nService } from '../i18n/i18n.service';
 })
 export class XoailaPageComponent {
   private readonly i18n = inject(I18nService);
+  private readonly seo = inject(SeoService);
 
   readonly points = ['xoaila.point1', 'xoaila.point2', 'xoaila.point3'];
+
+  constructor() {
+    this.seo.updateTags({
+      title: this.t('seo.xoaila.title'),
+      description: this.t('seo.xoaila.description')
+    });
+
+    this.seo.setJsonLd('softwareapp', {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'Xoaila',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+      description: this.t('seo.xoaila.description')
+    });
+  }
 
   t(key: string): string {
     return this.i18n.t(key);

@@ -1,0 +1,26 @@
+# WickyWave Software
+
+> Software house tworzący dedykowane aplikacje webowe, panele administracyjne i systemy wewnętrzne
+> dla firm B2B/B2C, oparte na Django, Angular i nowoczesnych API. Pomagamy firmom automatyzować
+> procesy, integrować dane między systemami i budować oprogramowanie dopasowane do realnych potrzeb
+> biznesu zamiast ograniczeń gotowych narzędzi.
+
+WickyWave Software projektuje i wdraża dedykowane aplikacje webowe: panele administracyjne,
+portale klienta, platformy SaaS, modele AI/ML oraz integracje z systemami ERP/CRM. Firma prowadzi
+również aktywny produkt SaaS o nazwie Xoaila, który monitoruje widoczność marek w klasycznych
+wyszukiwarkach oraz w odpowiedziach generowanych przez AI.
+
+## Strony
+
+- [Strona główna](https://wickywave.pl/): przegląd usług, procesu pracy i stosu technologicznego.
+- [Oferta](https://wickywave.pl/offer): zakres usług — aplikacje webowe, panele, automatyzacja, integracje API, opieka powdrożeniowa.
+- [Xoaila — aktywne SaaS](https://wickywave.pl/aktywne-saas): produkt SaaS do monitorowania i budowania widoczności marki w wyszukiwarkach i AI.
+- [O nas](https://wickywave.pl/about-us): informacje o firmie i podejściu do realizacji projektów.
+- [Aktualności](https://wickywave.pl/news): case studies, poradniki i aktualności produktowe.
+- [Kontakt](https://wickywave.pl/contact): dane kontaktowe i formularz kontaktu, e-mail hello@wickywave.wicky.
+- [Polityka prywatności](https://wickywave.pl/privacy-policy): zasady przetwarzania danych osobowych i plików cookie.
+
+## Uwagi
+
+Treść serwisu jest dostępna w języku polskim i angielskim (przełącznik na stronie); powyższe opisy
+dotyczą tej samej zawartości niezależnie od wybranego języka.

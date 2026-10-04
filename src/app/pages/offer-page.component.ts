@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { I18nService } from '../i18n/i18n.service';
+import { SeoService, SITE_URL } from '../seo.service';
 
 @Component({
   selector: 'app-offer-page',
@@ -55,8 +56,25 @@ import { I18nService } from '../i18n/i18n.service';
 })
 export class OfferPageComponent {
   private readonly i18n = inject(I18nService);
+  private readonly seo = inject(SeoService);
 
   readonly items = ['offer.item1', 'offer.item2', 'offer.item3', 'offer.item4'];
+
+  constructor() {
+    this.seo.updateTags({
+      title: this.t('seo.offer.title'),
+      description: this.t('seo.offer.description')
+    });
+
+    this.seo.setJsonLd('service', {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      serviceType: 'Custom software development',
+      provider: { '@type': 'Organization', name: 'WickyWave Software', url: SITE_URL },
+      description: this.t('seo.offer.description'),
+      areaServed: 'PL'
+    });
+  }
 
   t(key: string): string {
     return this.i18n.t(key);

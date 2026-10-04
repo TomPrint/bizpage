@@ -11,6 +11,7 @@ import {
 import { RouterLink } from '@angular/router';
 import { isPlatformBrowser, NgFor } from '@angular/common';
 import { I18nService } from '../i18n/i18n.service';
+import { SeoService, SITE_NAME, SITE_URL } from '../seo.service';
 
 @Component({
   selector: 'app-home-page',
@@ -413,8 +414,23 @@ import { I18nService } from '../i18n/i18n.service';
 })
 export class HomePageComponent implements AfterViewInit, OnDestroy {
   private readonly i18n = inject(I18nService);
+  private readonly seo = inject(SeoService);
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   private slideObserver?: IntersectionObserver;
+
+  constructor() {
+    this.seo.updateTags({
+      title: this.t('seo.home.title'),
+      description: this.t('seo.home.description'),
+      canonicalPath: '/'
+    });
+
+    this.seo.setJsonLd('breadcrumb', {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [{ '@type': 'ListItem', position: 1, name: SITE_NAME, item: `${SITE_URL}/` }]
+    });
+  }
 
   @ViewChildren('slideTitle', { read: ElementRef })
   private readonly animatedTitles!: QueryList<ElementRef<HTMLElement>>;
@@ -426,7 +442,8 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
 
   readonly serviceItems = [
     'home.services.item1', 'home.services.item2', 'home.services.item3',
-    'home.services.item4', 'home.services.item5', 'home.services.item6', 'home.services.item7'
+    'home.services.item4', 'home.services.item5', 'home.services.item6',
+    'home.services.item7', 'home.services.item8'
   ];
 
   readonly whyItems = [
