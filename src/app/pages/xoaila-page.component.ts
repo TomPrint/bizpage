@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+﻿import { Component, inject } from '@angular/core';
 import { NgFor } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { I18nService } from '../i18n/i18n.service';
@@ -9,6 +9,7 @@ import { SeoService } from '../seo.service';
   standalone: true,
   imports: [NgFor, RouterLink],
   template: `
+    <div class="bg-stripes" aria-hidden="true"><span></span><span></span></div>
     <!-- SEKCJA: Xoaila – opis produktu SaaS + lista punktów -->
     <section class="page-shell">
       <a class="logo-link" routerLink="/home" aria-label="Xoaila home">

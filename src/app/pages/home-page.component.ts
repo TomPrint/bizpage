@@ -1,4 +1,4 @@
-import {
+﻿import {
   AfterViewInit,
   Component,
   ElementRef,
@@ -18,6 +18,9 @@ import { SeoService, SITE_NAME, SITE_URL } from '../seo.service';
   standalone: true,
   imports: [RouterLink, NgFor],
   template: `
+    <!-- TŁO: długi skośny pas rysowany wraz ze scrollem (style w styles.css) -->
+    <div class="bg-stripes" aria-hidden="true"><span></span><span></span></div>
+
     <!-- SEKCJA: Hero – główny nagłówek z CTA -->
     <section class="mx-auto max-w-6xl px-6 pt-10 pb-14 md:px-10 md:pt-16">
       <p class="eyebrow">{{ t('home.eyebrow') }}</p>

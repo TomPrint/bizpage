@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -44,4 +44,67 @@ h3 {
 	font-family: 'Inter', system-ui, -apple-system, sans-serif;
 	letter-spacing: -0.025em;
 	color: var(--ink);
+}
+
+/* Tło strony głównej, Aktywne SaaS i Kontakt: długi skośny pas od prawego górnego rogu do lewego dolnego.
+   Pas jest widoczny od startu, fala płynie w pętli (wyłączana przy prefers-reduced-motion). */
+app-home-page,
+app-xoaila-page,
+app-contact-page {
+	--stripe-a: 124, 92, 235;
+	--stripe-b: 167, 139, 250;
+	--wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 400' preserveAspectRatio='none'%3E%3Cpath d='M25 0C45 100 5 100 25 200C45 300 5 300 25 400L75 400C55 300 95 300 75 200C55 100 95 100 75 0Z'/%3E%3C/svg%3E");
+	display: block;
+	isolation: isolate;
+}
+
+/* Tryb nocny: ciemniejszy, głębszy fiolet */
+.night-theme app-home-page,
+.night-theme app-xoaila-page,
+.night-theme app-contact-page {
+	--stripe-a: 67, 56, 202;
+	--stripe-b: 91, 70, 190;
+}
+
+.bg-stripes {
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.bg-stripes span {
+	position: absolute;
+	top: 50%;
+	left: 78%;
+	height: 220vmax;
+	transform: translate(-50%, -50%) rotate(45deg);
+	-webkit-mask: var(--wave) 0 0 / 100% 360px repeat-y;
+	mask: var(--wave) 0 0 / 100% 360px repeat-y;
+	animation: wave-flow 9s linear infinite;
+}
+
+@keyframes wave-flow {
+	to {
+		-webkit-mask-position: 0 360px;
+		mask-position: 0 360px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.bg-stripes span {
+		animation: none;
+	}
+}
+
+.bg-stripes span:first-child {
+	width: clamp(90px, 18vw, 260px);
+	background: linear-gradient(90deg, rgba(var(--stripe-a), 0.06), rgba(var(--stripe-a), 0.2) 50%, rgba(var(--stripe-a), 0.06));
+}
+
+.bg-stripes span:last-child {
+	width: clamp(24px, 5vw, 70px);
+	margin-left: clamp(120px, 24vw, 340px);
+	background: rgba(var(--stripe-b), 0.16);
 }

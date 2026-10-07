@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+﻿import { Component, inject } from '@angular/core';
 import { I18nService } from '../i18n/i18n.service';
 import { SeoService } from '../seo.service';
 
@@ -6,6 +6,7 @@ import { SeoService } from '../seo.service';
   selector: 'app-contact-page',
   standalone: true,
   template: `
+    <div class="bg-stripes" aria-hidden="true"><span></span><span></span></div>
     <!-- SEKCJA: Kontakt – lekka, szybka wersja bez ciężkich grafik -->
     <section class="page-shell contact-shell">
       <div class="contact-card">
