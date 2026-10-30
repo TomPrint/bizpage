@@ -1,4 +1,4 @@
-import { NgFor, isPlatformBrowser } from '@angular/common';
+import { NgFor, NgTemplateOutlet, isPlatformBrowser } from '@angular/common';
 import { Component, inject, signal, PLATFORM_ID } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CookieBannerComponent } from './cookie-banner.component';
@@ -10,7 +10,7 @@ import { SeoService, SITE_URL, SITE_NAME } from './seo.service';
 
 @Component({
   selector: 'app-root',
-  imports: [NgFor, RouterLink, RouterLinkActive, RouterOutlet, OceanBannerComponent, CookieBannerComponent],
+  imports: [NgFor, NgTemplateOutlet, RouterLink, RouterLinkActive, RouterOutlet, OceanBannerComponent, CookieBannerComponent],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -118,3 +118,4 @@ export class App {
     return `rgb(${rgb.join(', ')})`;
   }
 }
+
