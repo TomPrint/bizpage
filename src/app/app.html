@@ -1,7 +1,24 @@
-<!-- ============================================================
-     APP SHELL – główny wrapper, zarządza trybem dnia/nocy
-     Klasa .night-theme jest dodawana dynamicznie przez isDarkMode()
-     ============================================================ -->
+<!-- APP SHELL: klasa .night-theme jest dodawana przez isDarkMode() (Tailwind dark: = .night-theme) -->
+<ng-template #logo>
+  <span class="inline-flex items-center gap-2.5">
+    <svg class="h-9 w-9 shrink-0" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="36" height="36" rx="8" fill="#4F46E5" />
+      <polyline points="6,8 12,26 18,15 24,26 30,8" fill="none" stroke="white" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+    <span class="text-base font-bold leading-none tracking-tight text-slate-900 dark:text-slate-200">
+      WickyWave <span class="font-normal text-slate-500 dark:text-slate-400">Software</span>
+    </span>
+  </span>
+</ng-template>
+
+<ng-template #themeIcon>
+  @if (isDarkMode()) {
+    <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  } @else {
+    <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  }
+</ng-template>
+
 <div
   class="app-shell flex min-h-screen flex-col text-carbon"
   [style.--page-background]="pageBackground()"
@@ -12,129 +29,89 @@
   [style.--card-copy]="themeColor([71, 85, 105], [203, 213, 225])"
   [class.night-theme]="isDarkMode()"
 >
-  <!-- ── HEADER / NAWIGACJA GŁÓWNA ────────────────────────────── -->
-  <header class="site-header sticky top-0 z-40">
-    <div
-      class="relative mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-5 md:px-10"
-    >
-      <a
-        class="brand-link"
-        routerLink="/home"
-        (click)="closeMobileMenu()"
-        aria-label="WickyWave Software"
-      >
-        <svg
-          class="brand-icon"
-          viewBox="0 0 36 36"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-        >
-          <rect width="36" height="36" rx="8" fill="#4F46E5" />
-          <polyline
-            points="6,8 12,26 18,15 24,26 30,8"
-            fill="none"
-            stroke="white"
-            stroke-width="2.8"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-        <span class="brand-name"
-          >WickyWave <span class="brand-sub">Software</span></span
-        >
+  <!-- HEADER -->
+  <header
+    class="site-header sticky top-0 z-40 border-b border-slate-200 bg-white transition-colors duration-500 dark:border-white/10 dark:bg-[rgba(18,24,40,0.94)] dark:backdrop-blur-md"
+  >
+    <div class="relative mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-10 lg:py-4">
+      <a routerLink="/home" (click)="closeMobileMenu()" aria-label="WickyWave Software">
+        <ng-container *ngTemplateOutlet="logo"></ng-container>
       </a>
 
-      <nav
-        class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-2 xl:flex"
-        aria-label="Main menu"
-      >
+      <nav class="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 lg:flex" aria-label="Main menu">
         <a
           *ngFor="let item of navItems"
           [routerLink]="item.scrollTarget ? null : item.path"
           [routerLinkActive]="item.skipActive ? '' : 'menu-link-active'"
           (click)="scrollToSection(item.scrollTarget)"
-          class="menu-link"
+          class="whitespace-nowrap rounded-full px-3.5 py-1.5 text-sm font-medium text-slate-800 transition-colors hover:bg-slate-100 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white [&.menu-link-active]:bg-indigo-50 [&.menu-link-active]:font-semibold [&.menu-link-active]:text-accent dark:[&.menu-link-active]:bg-indigo-500/20 dark:[&.menu-link-active]:text-indigo-300"
           [class.cursor-pointer]="!!item.scrollTarget"
         >
           {{ t(item.label) }}
         </a>
       </nav>
 
-      <div class="hidden items-center gap-2 xl:flex">
+      <div class="hidden items-center gap-2 lg:flex">
         <button
-          class="theme-btn"
-          (click)="toggleDarkMode()"
           type="button"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition-colors hover:border-accent hover:text-accent dark:border-white/20 dark:text-slate-200 dark:hover:border-indigo-300 dark:hover:text-indigo-300"
+          (click)="toggleDarkMode()"
           [attr.aria-label]="isDarkMode() ? 'Tryb dzienny' : 'Tryb nocny'"
         >
-          @if (isDarkMode()) {
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          } @else {
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          }
+          <ng-container *ngTemplateOutlet="themeIcon"></ng-container>
         </button>
         <button
-          class="locale-btn"
-          [class.locale-btn-active]="locale() === 'pl'"
-          (click)="setLocale('pl')"
           type="button"
+          class="rounded-full border px-2.5 py-1 text-[0.8rem] font-semibold transition-colors"
+          [class]="locale() === 'pl' ? 'border-accent bg-accent text-white' : 'border-slate-200 text-slate-500 hover:border-accent hover:text-accent dark:border-white/20'"
+          (click)="setLocale('pl')"
         >
           PL
         </button>
         <button
-          class="locale-btn"
-          [class.locale-btn-active]="locale() === 'en'"
-          (click)="setLocale('en')"
           type="button"
+          class="rounded-full border px-2.5 py-1 text-[0.8rem] font-semibold transition-colors"
+          [class]="locale() === 'en' ? 'border-accent bg-accent text-white' : 'border-slate-200 text-slate-500 hover:border-accent hover:text-accent dark:border-white/20'"
+          (click)="setLocale('en')"
         >
           EN
         </button>
       </div>
 
       <button
-        class="hamburger xl:hidden"
         type="button"
+        class="grid gap-1 rounded-lg border border-slate-200 p-2 dark:border-white/20 lg:hidden"
         (click)="toggleMobileMenu()"
         aria-label="Open mobile menu"
       >
-        <span></span>
-        <span></span>
-        <span></span>
+        <span class="block h-0.5 w-[18px] rounded-sm bg-slate-700 dark:bg-slate-200"></span>
+        <span class="block h-0.5 w-[18px] rounded-sm bg-slate-700 dark:bg-slate-200"></span>
+        <span class="block h-0.5 w-[18px] rounded-sm bg-slate-700 dark:bg-slate-200"></span>
       </button>
     </div>
   </header>
 
-  <!-- ── MOBILE MENU – panel wysuwany z góry (widoczny < xl) ──── -->
-  <div class="mobile-shell" [class.mobile-shell-open]="isMobileMenuOpen()">
-    <div class="mobile-backdrop" (click)="closeMobileMenu()"></div>
-    <nav class="mobile-panel" aria-label="Mobile menu">
+  <!-- MOBILE / LANDSCAPE MENU (< lg) -->
+  <div
+    class="fixed inset-0 z-50 h-dvh lg:hidden"
+    [class.pointer-events-none]="!isMobileMenuOpen()"
+    [attr.aria-hidden]="!isMobileMenuOpen()"
+  >
+    <div
+      class="absolute inset-0 bg-slate-900/55 transition-opacity duration-200"
+      [class.opacity-0]="!isMobileMenuOpen()"
+      (click)="closeMobileMenu()"
+    ></div>
+    <nav
+      class="absolute inset-0 flex flex-col overflow-y-auto bg-white px-4 py-4 text-slate-900 transition-transform duration-200 dark:bg-slate-900 dark:text-slate-50 sm:px-6 sm:py-6"
+      [class.-translate-y-full]="!isMobileMenuOpen()"
+      aria-label="Mobile menu"
+    >
       <div class="flex items-center justify-between">
-        <div class="brand-link">
-          <svg
-            class="brand-icon"
-            viewBox="0 0 36 36"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <rect width="36" height="36" rx="8" fill="#4F46E5" />
-            <polyline
-              points="6,8 12,26 18,15 24,26 30,8"
-              fill="none"
-              stroke="white"
-              stroke-width="2.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-          <span class="brand-name"
-            >WickyWave <span class="brand-sub">Software</span></span
-          >
-        </div>
+        <ng-container *ngTemplateOutlet="logo"></ng-container>
         <button
           type="button"
-          class="mobile-close-btn"
+          class="p-2 text-lg leading-none text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-50"
           (click)="closeMobileMenu()"
           aria-label="Close mobile menu"
         >
@@ -142,70 +119,65 @@
         </button>
       </div>
 
-      <div class="mobile-nav-list">
+      <div class="my-4 grid flex-1 content-center gap-3 sm:grid-cols-2 sm:gap-4">
         <a
           *ngFor="let item of navItems"
           [routerLink]="item.scrollTarget ? null : item.path"
           [fragment]="undefined"
           (click)="closeMobileMenu(); scrollToSection(item.scrollTarget)"
-          class="mobile-link"
+          class="flex min-h-14 items-center justify-center rounded-2xl border border-slate-900/10 px-4 py-3 text-center text-lg font-semibold text-slate-800 transition-colors hover:bg-slate-900/5 dark:border-white/10 dark:text-slate-200 dark:hover:bg-white/5 portrait:min-h-20"
         >
           {{ t(item.label) }}
         </a>
       </div>
 
-      <div class="mobile-actions">
+      <div class="flex gap-3">
         <button
-          class="locale-btn w-1/2"
-          [class.locale-btn-active]="locale() === 'pl'"
-          (click)="setLocale('pl')"
           type="button"
+          class="h-11 flex-1 rounded-full border text-sm font-semibold transition-colors"
+          [class]="locale() === 'pl' ? 'border-accent bg-accent text-white' : 'border-slate-900/15 text-slate-500 dark:border-white/20 dark:bg-white/5 dark:text-slate-200'"
+          (click)="setLocale('pl')"
         >
           PL
         </button>
         <button
-          class="locale-btn w-1/2"
-          [class.locale-btn-active]="locale() === 'en'"
-          (click)="setLocale('en')"
           type="button"
+          class="h-11 flex-1 rounded-full border text-sm font-semibold transition-colors"
+          [class]="locale() === 'en' ? 'border-accent bg-accent text-white' : 'border-slate-900/15 text-slate-500 dark:border-white/20 dark:bg-white/5 dark:text-slate-200'"
+          (click)="setLocale('en')"
         >
           EN
         </button>
         <button
-          class="theme-btn-mobile"
-          (click)="toggleDarkMode()"
           type="button"
+          class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-900/15 text-slate-500 dark:border-white/20 dark:bg-white/5 dark:text-slate-200"
+          (click)="toggleDarkMode()"
           [attr.aria-label]="isDarkMode() ? 'Tryb dzienny' : 'Tryb nocny'"
         >
-          @if (isDarkMode()) {
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          } @else {
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          }
+          <ng-container *ngTemplateOutlet="themeIcon"></ng-container>
         </button>
       </div>
     </nav>
   </div>
 
-  <!-- ── MAIN CONTENT – router-outlet wstrzykuje tutaj strony ─── -->
   <main class="flex-1">
     <router-outlet></router-outlet>
   </main>
 
-  <!-- ── FOOTER – animacja oceanu zmienia się z trybem dnia/nocy  -->
+  <!-- FOOTER -->
   <footer
-    class="site-footer px-6 pb-12 pt-20 text-sm text-slate-400 md:px-10 md:pb-14 md:pt-24"
+    class="relative overflow-hidden bg-gradient-to-b from-[#0F172A] to-[#0B132B] px-4 pb-10 pt-16 text-sm text-slate-400 sm:px-6 md:px-10 md:pb-14 md:pt-24"
   >
     <app-ocean-banner
-      class="footer-ocean"
+      class="pointer-events-none absolute inset-0 z-0"
       [time]="footerTime()"
       [decorative]="true"
     ></app-ocean-banner>
 
-    <div class="relative mx-auto max-w-6xl text-white">
-      {{ t("footer.copy") }}
-      <a routerLink="/privacy-policy" class="footer-privacy-link">{{ t("footer.privacyLink") }}</a>
-      <button type="button" class="footer-privacy-link footer-cookie-btn" (click)="openCookiePreferences()">
+    <div class="relative z-10 mx-auto flex max-w-6xl flex-wrap items-center gap-x-3 gap-y-1 text-white">
+      <span>{{ t("footer.copy") }}</span>
+      <a routerLink="/privacy-policy" class="text-violet-300 underline underline-offset-2 hover:text-white">{{ t("footer.privacyLink") }}</a>
+      <button type="button" class="text-violet-300 underline underline-offset-2 hover:text-white" (click)="openCookiePreferences()">
         {{ t("footer.cookieSettings") }}
       </button>
     </div>
