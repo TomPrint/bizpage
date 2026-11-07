@@ -10,6 +10,7 @@ export const SITE_NAME = 'WickyWave Software';
 export interface SeoTags {
   title: string;
   description: string;
+  keywords?: string;
   /** Opcjonalna ścieżka do obrazu OG/Twitter (względem SITE_URL). */
   image?: string;
   /** Opcjonalne wymuszenie ścieżki canonical (np. '/' dla strony głównej). */
@@ -35,6 +36,11 @@ export class SeoService {
     this.title.setTitle(tags.title);
 
     this.meta.updateTag({ name: 'description', content: tags.description });
+    if (tags.keywords) {
+      this.meta.updateTag({ name: 'keywords', content: tags.keywords });
+    } else {
+      this.meta.removeTag('name="keywords"');
+    }
     this.meta.updateTag({ property: 'og:title', content: tags.title });
     this.meta.updateTag({ property: 'og:description', content: tags.description });
     this.meta.updateTag({ property: 'og:url', content: canonicalUrl });

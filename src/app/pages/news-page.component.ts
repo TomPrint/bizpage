@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { I18nService } from '../i18n/i18n.service';
-import { SeoService, SITE_URL } from '../seo.service';
+import { SeoService } from '../seo.service';
 
 @Component({
   selector: 'app-news-page',
@@ -74,7 +74,6 @@ export class NewsPageComponent {
       '@type': 'CollectionPage',
       name: this.t('seo.news.title'),
       description: this.t('seo.news.description'),
-      url: `${SITE_URL}/news`,
       hasPart: [
         { '@type': 'Article', headline: this.t('news.card1') },
         { '@type': 'Article', headline: this.t('news.card2') },

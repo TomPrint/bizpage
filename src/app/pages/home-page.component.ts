@@ -427,6 +427,7 @@ export class HomePageComponent implements AfterViewInit, OnDestroy {
     this.seo.updateTags({
       title: this.t('seo.home.title'),
       description: this.t('seo.home.description'),
+      keywords: this.t('seo.home.keywords'),
       canonicalPath: '/'
     });
 

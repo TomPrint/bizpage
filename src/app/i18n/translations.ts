@@ -9,6 +9,10 @@ export const translations: Record<string, Record<Locale, string>> = {
     pl: 'Projektujemy i wdrażamy dedykowane aplikacje B2B, panele administracyjne i systemy wewnętrzne oparte na Django, Angular i nowoczesnych API.',
     en: 'We design and build custom B2B applications, admin panels and internal systems powered by Django, Angular and modern APIs.'
   },
+  'seo.home.keywords': {
+    pl: 'tworzenie oprogramowania, dedykowane oprogramowanie, software house, aplikacje webowe, aplikacje B2B, systemy informatyczne, automatyzacja procesów, integracje API',
+    en: 'software development, custom software, software house, web applications, B2B applications, business software, process automation, API integrations'
+  },
   'seo.offer.title': { pl: 'Oferta — aplikacje webowe, panele i automatyzacja | WickyWave', en: 'Offer — Web Apps, Admin Panels & Automation | WickyWave' },
   'seo.offer.description': {
     pl: 'Aplikacje webowe B2B/B2C, strony internetowe (landing page), panele administracyjne, automatyzacja, integracje API i opieka powdrożeniowa.',

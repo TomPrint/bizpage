@@ -1,11 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-import { Meta } from '@angular/platform-browser';
+import { Meta, Title } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { routes } from './app.routes';
 import { ContactPageComponent } from './pages/contact-page.component';
 import { HomePageComponent } from './pages/home-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page.component';
+import { PrivacyPageComponent } from './pages/privacy-page.component';
 
 describe('Published routes', () => {
   beforeEach(() => {
@@ -35,5 +36,28 @@ describe('Published routes', () => {
 
     await harness.navigateByUrl('/', HomePageComponent);
     expect(meta.getTag('name="robots"')?.content).toBe('index, follow');
+  });
+
+  it('sets the homepage canonical and keywords, then clears homepage keywords on other pages', async () => {
+    const harness = await RouterTestingHarness.create();
+    const meta = TestBed.inject(Meta);
+
+    await harness.navigateByUrl('/', HomePageComponent);
+    expect(document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href).toBe('https://wickywave.pl/');
+    expect(meta.getTag('name="keywords"')?.content).toContain('tworzenie oprogramowania');
+
+    await harness.navigateByUrl('/contact', ContactPageComponent);
+    expect(document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href).toBe('https://wickywave.pl/contact');
+    expect(meta.getTag('name="keywords"')).toBeNull();
+  });
+
+  it('uses a privacy-specific title and canonical URL', async () => {
+    const harness = await RouterTestingHarness.create();
+    await harness.navigateByUrl('/privacy-policy', PrivacyPageComponent);
+
+    expect(TestBed.inject(Title).getTitle()).toContain('Polityka prywatności');
+    expect(TestBed.inject(Title).getTitle()).not.toContain('dedykowane aplikacje webowe');
+    expect(document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href)
+      .toBe('https://wickywave.pl/privacy-policy');
   });
 });
