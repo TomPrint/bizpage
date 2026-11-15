@@ -40,8 +40,8 @@ export const translations = {
   },
   'seo.saas.title': { pl: 'Produkty SaaS Mid-Grator i Xoaila | WickyWave', en: 'Mid-Grator and Xoaila SaaS products | WickyWave' },
   'seo.saas.description': {
-    pl: 'Poznaj Mid-Grator do integracji danych CSV oraz Xoaila — powstające narzędzie do budowania widoczności w wyszukiwarkach i AI.',
-    en: 'Discover Mid-Grator for CSV data integration and Xoaila, an upcoming tool for visibility in search engines and AI.'
+    pl: 'Poznaj Mid-Grator do integracji danych CSV oraz Xoaila — narzędzie do budowania widoczności w wyszukiwarkach i AI.',
+    en: 'Discover Mid-Grator for CSV data integration and Xoaila, a tool for visibility in search engines and AI.'
   },
 
   'menu.home': { pl: 'Home', en: 'Home' },
@@ -173,22 +173,44 @@ export const translations = {
   'news.card1': { pl: 'Jak skracamy czas obsługi zamówienia o 43%', en: 'How we reduced order processing time by 43%' },
   'news.card2': { pl: 'Checklist MVP dla startupu B2B', en: 'MVP checklist for B2B startups' },
   'news.card3': { pl: 'Kiedy warto zamienić Excel na aplikację', en: 'When to replace spreadsheets with an app' },
-  'midgrator.body': {
-    pl: 'Mid-Grator to aktywny produkt SaaS, który pomaga dopasować dane z plików CSV hurtowni do wymagań integratora sklepu lub firmy.',
-    en: 'Mid-Grator is an active SaaS product that helps adapt wholesaler CSV data to the requirements of your store or business integration.'
+  'midgrator.tagline': {
+    pl: 'Automatycznie dopasuj pliki CSV hurtowni do integracji swojego sklepu.',
+    en: 'Automatically adapt wholesaler CSV files to your store integration.'
   },
-  'midgrator.point1': { pl: 'Pobieranie pliku CSV hurtowni oraz wybór i zmiana nazw kolumn.', en: 'Import wholesaler CSV files, select columns and rename them.' },
-  'midgrator.point2': { pl: 'Zmiana wartości, przeliczanie cen i własne reguły dla danych.', en: 'Transform values, adjust prices and define custom data rules.' },
-  'midgrator.point3': { pl: 'Udostępnianie gotowego pliku pod indywidualnym linkiem i jego regularna aktualizacja.', en: 'Share the resulting file through a dedicated link and update it regularly.' },
+  'midgrator.body': {
+    pl: 'Mid-Grator to usługa SaaS, która automatyzuje przygotowywanie i przekształcanie plików CSV z danymi produktowymi hurtowni zgodnie z wymaganiami integracji sklepu internetowego. Pozwala dostosować strukturę plików, modyfikować wartości i ceny produktów oraz udostępniać gotowe dane pod indywidualnym adresem URL, z możliwością ich regularnej aktualizacji.',
+    en: 'Mid-Grator is a SaaS service that automates the preparation and transformation of wholesaler product data in CSV files to meet the requirements of online store integrations. It lets you adapt file structures, modify product values and prices, and share the resulting data at a dedicated URL with the option of regular updates.'
+  },
+  'midgrator.bodyMobile': {
+    pl: 'Mid-Grator automatycznie dostosowuje pliki CSV hurtowni do integracji sklepu. Pozwala zmieniać dane i ceny oraz udostępniać aktualizowany plik pod indywidualnym adresem URL.',
+    en: 'Mid-Grator automatically adapts wholesaler CSV files to store integrations. Modify data and prices, then share the updated file at a dedicated URL.'
+  },
+  'midgrator.point1.label': { pl: 'Automatyczne dopasowanie danych produktowych', en: 'Automatic product data adaptation' },
+  'midgrator.point1': { pl: 'umożliwia wybór kolumn, zmianę ich nazw i dostosowanie struktury pliku CSV do wymagań integratora.', en: 'lets you select and rename columns and adapt the CSV file structure to integration requirements.' },
+  'midgrator.point2.label': { pl: 'Elastyczne przetwarzanie danych', en: 'Flexible data processing' },
+  'midgrator.point2': { pl: 'pozwala modyfikować wartości, przeliczać ceny i definiować własne reguły transformacji danych produktowych.', en: 'lets you modify values, recalculate prices and define custom transformation rules for product data.' },
+  'midgrator.point3.label': { pl: 'Gotowe pliki CSV zawsze pod ręką', en: 'Ready-to-use CSV files at your fingertips' },
+  'midgrator.point3': { pl: 'udostępnia przetworzone dane pod indywidualnym linkiem i umożliwia ich regularną aktualizację, ułatwiając synchronizację oferty sklepu z danymi hurtowni.', en: 'shares processed data through a dedicated link and supports regular updates, making it easier to synchronize your store’s catalog with wholesaler data.' },
   'midgrator.visit': { pl: 'PRZEJDŹ DO SERWISU', en: 'VISIT THE SERVICE' },
   'xoaila.title': { pl: 'Xoaila - SaaS pod nowoczesne pozycjonowanie AI', en: 'Xoaila - SaaS for modern AI-first positioning' },
-  'xoaila.body': {
-    pl: 'Xoaila to powstający produkt SaaS, który pomoże markom budować widoczność w nowym modelu wyszukiwania: od klasycznego SEO po odpowiedzi generowane przez AI.',
-    en: 'Xoaila is an upcoming SaaS product designed to help brands build visibility in a new search model: from classic SEO to AI-generated answer surfaces.'
+  'xoaila.tagline': {
+    pl: 'Zwiększ widoczność swojej firmy w wyszukiwarkach i AI.',
+    en: 'Increase your company’s visibility in search engines and AI.'
   },
-  'xoaila.point1': { pl: 'Monitoring obecności marki w wynikach AI i wyszukiwarkach.', en: 'Brand visibility monitoring across AI answers and search engines.' },
-  'xoaila.point2': { pl: 'Rekomendacje treści pod indeksowanie semantyczne i LLM.', en: 'Content recommendations for semantic indexing and LLM relevance.' },
-  'xoaila.point3': { pl: 'Dashboard wzrostu widoczności i tematów, które konwertują.', en: 'Growth dashboard for visibility and conversion-ready topic clusters.' },
+  'xoaila.body': {
+    pl: 'Xoaila to usługa, która przekształca informacje o firmie w ustrukturyzowane dane zrozumiałe dla wyszukiwarek i systemów sztucznej inteligencji, takich jak ChatGPT, Claude, Gemini i Perplexity. Automatycznie generuje i udostępnia profile firmowe w formatach ułatwiających AI rozpoznawanie oferty, interpretowanie informacji i przywoływanie firmy w odpowiedziach.',
+    en: 'Xoaila is a service that transforms company information into structured data that search engines and AI systems such as ChatGPT, Claude, Gemini and Perplexity can understand. It automatically generates and publishes company profiles in formats that help AI recognize offerings, interpret information and reference the company in its answers.'
+  },
+  'xoaila.bodyMobile': {
+    pl: 'Xoaila przekształca informacje o firmie w dane zrozumiałe dla wyszukiwarek i AI. Automatycznie tworzy i udostępnia profile, które pomagają systemom AI poznawać i przywoływać ofertę.',
+    en: 'Xoaila turns company information into data that search engines and AI understand. It creates and publishes profiles that help AI recognize and reference your offerings.'
+  },
+  'xoaila.point1.label': { pl: 'Widoczność w wyszukiwarkach AI', en: 'Visibility in AI search engines' },
+  'xoaila.point1': { pl: 'pomaga systemom sztucznej inteligencji odnajdywać, rozumieć i cytować informacje o firmie.', en: 'helps AI systems find, understand and cite company information.' },
+  'xoaila.point2.label': { pl: 'Dane zoptymalizowane dla AI', en: 'AI-optimized data' },
+  'xoaila.point2': { pl: 'automatycznie tworzy profile w formatach JSON, JSON-LD, Markdown i llms.txt oraz hostuje te dane na publicznych endpointach, ułatwiając maszynom interpretację oferty i specjalizacji firmy.', en: 'automatically creates profiles in JSON, JSON-LD, Markdown and llms.txt and hosts the data at public endpoints, helping machines interpret the company’s offerings and specialties.' },
+  'xoaila.point3.label': { pl: 'Większa szansa na rekomendacje', en: 'A greater chance of recommendations' },
+  'xoaila.point3': { pl: 'udostępnia aktualne informacje o firmie pod publicznymi adresami URL, wspierając ich wykorzystanie przez wyszukiwarki, modele AI i agentów AI.', en: 'publishes up-to-date company information at public URLs, supporting its use by search engines, AI models and AI agents.' },
   'xoaila.soon': { pl: 'START USŁUGI WKRÓTCE', en: 'SERVICE LAUNCHING SOON' },
   'contact.title': { pl: 'Kontakt', en: 'Contact' },
   'contact.body': {

@@ -13,35 +13,43 @@ import { SeoService } from '../seo.service';
     <div class="saas-shell">
       <section class="saas-card">
         <header class="saas-card-header">
-          <a class="logo-link mid-grator-link" href="https://midgrator.pl/">
-            <img class="mid-grator-logo" src="/mid-grator-logo.jpg" alt="Mid-Grator" width="640" height="160">
-          </a>
-        </header>
-
-        <p>{{ t('midgrator.body') }}</p>
-
-        <ul>
-          <li *ngFor="let point of midgratorPoints">{{ t(point) }}</li>
-        </ul>
-
-        <a class="service-button" href="https://midgrator.pl/">{{ t('midgrator.visit') }}</a>
-      </section>
-
-      <section class="saas-card">
-        <header class="saas-card-header">
           <a class="logo-link" [routerLink]="localizedPath('/')" aria-label="Xoaila home">
             <span class="logo-word">xoaila</span>
             <span class="logo-mark" aria-hidden="true"></span>
           </a>
+          <p class="tagline">{{ t('xoaila.tagline') }}</p>
         </header>
 
-        <p>{{ t('xoaila.body') }}</p>
+        <p class="service-description">
+          <span class="description-full">{{ t('xoaila.body') }}</span>
+          <span class="description-mobile">{{ t('xoaila.bodyMobile') }}</span>
+        </p>
 
         <ul>
-          <li *ngFor="let point of points">{{ t(point) }}</li>
+          <li *ngFor="let point of points"><strong>{{ t(point + '.label') }}</strong> – {{ t(point) }}</li>
         </ul>
 
-        <button class="service-button" type="button" disabled>{{ t('xoaila.soon') }}</button>
+        <a class="service-button" href="https://xoaila.pl/">{{ t('midgrator.visit') }}</a>
+      </section>
+
+      <section class="saas-card">
+        <header class="saas-card-header">
+          <a class="logo-link mid-grator-link" href="https://midgrator.pl/">
+            <img class="mid-grator-logo" src="/mid-grator-logo.jpg" alt="Mid-Grator" width="640" height="160">
+          </a>
+          <p class="tagline">{{ t('midgrator.tagline') }}</p>
+        </header>
+
+        <p class="service-description">
+          <span class="description-full">{{ t('midgrator.body') }}</span>
+          <span class="description-mobile">{{ t('midgrator.bodyMobile') }}</span>
+        </p>
+
+        <ul>
+          <li *ngFor="let point of midgratorPoints"><strong>{{ t(point + '.label') }}</strong> – {{ t(point) }}</li>
+        </ul>
+
+        <a class="service-button" href="https://midgrator.pl/">{{ t('midgrator.visit') }}</a>
       </section>
     </div>
   `,
@@ -136,6 +144,31 @@ import { SeoService } from '../seo.service';
         line-height: 1.75;
       }
 
+      .description-mobile {
+        display: none;
+      }
+
+      @media (min-width: 641px) {
+        .saas-card .service-description {
+          max-width: none;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .description-full {
+          display: none;
+        }
+
+        .description-mobile {
+          display: inline;
+        }
+      }
+
+      .saas-card-header .tagline {
+        margin-bottom: 0;
+        font-weight: 600;
+      }
+
       .service-button {
         display: inline-block;
         margin-top: 1.75rem;
@@ -150,18 +183,13 @@ import { SeoService } from '../seo.service';
         transition: background 150ms ease;
       }
 
-      .service-button:not(:disabled):hover {
+      .service-button:hover {
         background: #4338CA;
       }
 
       .service-button:focus-visible {
         outline: 3px solid #818cf8;
         outline-offset: 3px;
-      }
-
-      .service-button:disabled {
-        background: #64748b;
-        cursor: not-allowed;
       }
 
       .saas-card ul {
@@ -242,6 +270,7 @@ export class XoailaPageComponent implements OnDestroy {
             '@type': 'SoftwareApplication',
             inLanguage: this.i18n.locale(),
             name: 'Xoaila',
+            url: 'https://xoaila.pl/',
             applicationCategory: 'BusinessApplication',
             operatingSystem: 'Web',
             description: this.t('xoaila.body')

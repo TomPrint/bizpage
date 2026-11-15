@@ -166,7 +166,7 @@ describe('Published routes', () => {
       .toBe('https://wickywave.pl/privacy-policy');
   });
 
-  it('shows Mid-Grator before the upcoming Xoaila in both languages', async () => {
+  it('shows Xoaila before Mid-Grator in both languages', async () => {
     const i18n = TestBed.inject(I18nService);
     i18n.setLocale('pl');
     const harness = await RouterTestingHarness.create();
@@ -178,28 +178,28 @@ describe('Published routes', () => {
     expect(sections[1].classList.contains('saas-card')).toBeTrue();
     expect(sections[0].firstElementChild?.tagName).toBe('HEADER');
     expect(sections[1].firstElementChild?.tagName).toBe('HEADER');
-    const link = sections[0].querySelector<HTMLAnchorElement>('.saas-card-header a');
+    expect(sections[0].textContent).toContain('xoaila');
+    const xoailaVisit = sections[0].querySelector<HTMLAnchorElement>('a.service-button');
+    expect(xoailaVisit?.href).toBe('https://xoaila.pl/');
+    expect(xoailaVisit?.textContent?.trim()).toBe('PRZEJDŹ DO SERWISU');
+    expect(sections[0].lastElementChild).toBe(xoailaVisit);
+    const link = sections[1].querySelector<HTMLAnchorElement>('.saas-card-header a');
     expect(link?.href).toBe('https://midgrator.pl/');
     expect(link?.querySelector('img')?.getAttribute('src')).toBe('/mid-grator-logo.jpg');
     expect(link?.querySelector('img')?.alt).toBe('Mid-Grator');
-    expect(sections[0].textContent).toContain('aktywny produkt SaaS');
-    expect(sections[0].querySelectorAll('li').length).toBe(3);
-    const visit = sections[0].querySelector<HTMLAnchorElement>('a.service-button');
+    expect(sections[1].textContent).toContain('Mid-Grator to usługa SaaS');
+    expect(sections[1].querySelectorAll('li').length).toBe(3);
+    const visit = sections[1].querySelector<HTMLAnchorElement>('a.service-button');
     expect(visit?.href).toBe('https://midgrator.pl/');
     expect(visit?.textContent?.trim()).toBe('PRZEJDŹ DO SERWISU');
-    expect(sections[0].lastElementChild).toBe(visit);
-    expect(sections[1].textContent).toContain('xoaila');
-    const soon = sections[1].querySelector<HTMLButtonElement>('button.service-button');
-    expect(soon?.disabled).toBeTrue();
-    expect(soon?.textContent?.trim()).toBe('START USŁUGI WKRÓTCE');
-    expect(sections[1].lastElementChild).toBe(soon);
-    expect(sections[1].textContent).not.toContain('Usługa będzie dostępna wkrótce.');
+    expect(sections[1].lastElementChild).toBe(visit);
+    expect(sections[0].textContent).not.toContain('Usługa będzie dostępna wkrótce.');
     expect(TestBed.inject(Title).getTitle()).toContain('Mid-Grator');
 
     i18n.setLocale('en');
     harness.detectChanges();
-    expect(sections[0].textContent).toContain('active SaaS product');
+    expect(sections[1].textContent).toContain('Mid-Grator is a SaaS service');
     expect(visit?.textContent?.trim()).toBe('VISIT THE SERVICE');
-    expect(soon?.textContent?.trim()).toBe('SERVICE LAUNCHING SOON');
+    expect(xoailaVisit?.textContent?.trim()).toBe('VISIT THE SERVICE');
   });
 });
