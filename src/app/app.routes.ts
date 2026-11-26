@@ -21,6 +21,10 @@ const publishedRoutes: Routes = [
 ];
 
 export const routes: Routes = [
+  {
+    path: 'admin-login',
+    loadComponent: () => import('./pages/admin-page.component').then(m => m.AdminPageComponent)
+  },
   ...(['pl', 'en', 'de'] as const).flatMap(locale =>
     publishedRoutes.map(route => ({
       ...route,

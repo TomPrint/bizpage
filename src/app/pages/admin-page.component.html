@@ -1,0 +1,171 @@
+<section class="admin-page">
+  <div class="admin-heading">
+    <div>
+      <p class="eyebrow">WickyWave</p>
+      <h1>Panel administracyjny</h1>
+    </div>
+    @if (user()) {
+      <button type="button" class="secondary" (click)="logout()" [disabled]="busy()">Wyloguj</button>
+    }
+  </div>
+
+  @if (error() && !selected) {
+    <p class="alert" role="alert">{{ error() }}</p>
+  }
+  @if (loading()) {
+    <p>Ładowanie panelu…</p>
+  } @else if (!user()) {
+    <div class="card login">
+      <h2>Logowanie</h2>
+      <button type="button" (click)="login()" [disabled]="busy()">Zaloguj przez Google</button>
+    </div>
+  } @else if (accessGranted()) {
+    <nav class="actions panel-nav" aria-label="Widoki klientów">
+      <button type="button" [class.secondary]="view !== 'form'" (click)="newClient()" [disabled]="busy()">Dodaj klienta</button>
+      <button type="button" [class.secondary]="view !== 'table'" (click)="showClients()" [disabled]="busy()">Tabela klientów</button>
+    </nav>
+    @if (view === 'table') {
+      <div class="card">
+        <h2>Klienci</h2>
+        <p>Na czerwono oznaczamy klientów, których termin follow-upu już nadszedł.</p>
+        <div class="table-controls">
+          <label>Szukaj po nazwie lub NIP
+            <input type="search" [(ngModel)]="search" placeholder="Nazwa klienta lub NIP">
+          </label>
+          <label>Sortuj według
+            <select [(ngModel)]="sortBy">
+              <option value="createdAt">Daty dodania (najnowsi)</option>
+              <option value="name">Nazwy</option>
+              <option value="industry">Branży</option>
+            </select>
+          </label>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Firma</th><th>Adres</th><th>NIP</th><th>Branża</th><th>Wielkość</th><th>E-mail</th><th>Telefon</th><th>Ostatnia aktywność</th><th>Follow-up</th><th>Status</th><th>Akcje</th></tr></thead>
+            <tbody>
+              @for (item of visibleClients; track item.id) {
+                <tr [class.due]="isDue(item)">
+                  <td><button type="button" class="client-link" (click)="selectClient(item)" [disabled]="busy()">{{ item.company || 'Firma bez nazwy' }}</button></td>
+                  <td>{{ item.address || 'Brak' }}</td>
+                  <td>{{ item.nip || 'Brak' }}</td>
+                  <td>{{ item.industry || 'Brak' }}</td>
+                  <td>{{ item.size || 'Brak' }}</td>
+                  <td>@if (item.email) { <a [href]="'mailto:' + item.email">{{ item.email }}</a> } @else { Brak }</td>
+                  <td>@if (item.phone) { <a [href]="'tel:' + item.phone">{{ item.phone }}</a> } @else { Brak }</td>
+                  <td>{{ (item.lastActivity | date:'dd.MM.yyyy') || 'Brak' }}</td>
+                  <td>{{ item.followUp || 'Brak' }} @if (isDue(item)) { <strong>— do kontaktu</strong> }</td>
+                  <td>
+                    @if (item.status === 'X') { <span class="status-icon refused" role="img" aria-label="Odmowa" title="Odmowa">✕</span> }
+                    @else if (item.status === 'V') { <span class="status-icon interested" role="img" aria-label="Zainteresowany" title="Zainteresowany">✓</span> }
+                    @else { <span aria-label="Brak statusu">—</span> }
+                  </td>
+                  <td><div class="actions table-actions">
+                    <button type="button" class="secondary icon-button" (click)="editClient(item)" [disabled]="busy()" aria-label="Edytuj klienta" title="Edytuj klienta">
+                      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"/></svg>
+                    </button>
+                    <button type="button" class="secondary icon-button" (click)="selectClient(item)" [disabled]="busy()" aria-label="Szczegóły i aktywności" title="Szczegóły i aktywności">
+                      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+                    </button>
+                  </div></td>
+                </tr>
+              } @empty {
+                <tr><td colspan="11">{{ search.trim() ? 'Brak pasujących klientów.' : 'Brak klientów.' }}</td></tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    } @else if (view === 'form') {
+      <form class="card" (ngSubmit)="saveClient()">
+        <h2>{{ editingId ? 'Edytuj klienta' : 'Dodaj klienta' }}</h2>
+        <div class="form-grid">
+          <label class="full">Nazwa / imię i nazwisko <input name="name" [(ngModel)]="client.name" maxlength="200"></label>
+          <label class="full">Firma <input name="company" [(ngModel)]="client.company" maxlength="200"></label>
+          <label class="full">Adres <input name="address" [(ngModel)]="client.address" maxlength="500"></label>
+          <label class="full">NIP firmy <input name="nip" [(ngModel)]="client.nip" maxlength="30"></label>
+          <label>Branża <input name="industry" [(ngModel)]="client.industry" maxlength="200"></label>
+          <label>Wielkość klienta
+            <select name="size" [(ngModel)]="client.size">
+              <option value="">Nie podano</option><option value="MAŁY">MAŁY</option><option value="ŚREDNI">ŚREDNI</option><option value="DUŻY">DUŻY</option>
+            </select>
+          </label>
+          <label>Status
+            <select name="status" class="status-select" [class.refused]="client.status === 'X'" [class.interested]="client.status === 'V'" [(ngModel)]="client.status">
+              <option value="">Nie podano</option><option class="refused" value="X" aria-label="Odmowa" title="Odmowa">✕</option><option class="interested" value="V" aria-label="Zainteresowany" title="Zainteresowany">✓</option>
+            </select>
+          </label>
+          <label>E-mail <input type="email" name="clientEmail" [(ngModel)]="client.email" maxlength="320"></label>
+          <label>Telefon <input type="tel" name="phone" [(ngModel)]="client.phone" maxlength="100"></label>
+          <label class="full">Data następnego follow-upu <input type="date" name="followUp" [(ngModel)]="client.followUp"></label>
+          <label class="full">Notatki <textarea name="notes" [(ngModel)]="client.notes" rows="3"></textarea></label>
+          <div class="actions full">
+            <button type="submit" [disabled]="busy()">Zapisz</button>
+            <button type="button" class="secondary" (click)="showClients()" [disabled]="busy()">Anuluj</button>
+          </div>
+        </div>
+      </form>
+    } @else {
+      @if (selected; as selectedClient) {
+        <section class="card">
+          <div class="details-heading">
+            <h2>Szczegóły: {{ selectedClient.company || 'Firma bez nazwy' }}</h2>
+            <div class="actions">
+              <button type="button" class="secondary" (click)="editClient(selectedClient)" [disabled]="busy()">Edytuj</button>
+              <button type="button" class="secondary" (click)="showClients()" [disabled]="busy()">Wróć do tabeli</button>
+            </div>
+          </div>
+          @if (error()) { <p class="alert" role="alert">{{ error() }}</p> }
+          <dl class="details-grid">
+            <div><dt>Nazwa / imię i nazwisko</dt><dd>{{ selectedClient.name || 'Brak' }}</dd></div>
+            <div><dt>Firma</dt><dd>{{ selectedClient.company || 'Brak' }}</dd></div>
+            <div><dt>Adres</dt><dd>{{ selectedClient.address || 'Brak' }}</dd></div>
+            <div><dt>NIP</dt><dd>{{ selectedClient.nip || 'Brak' }}</dd></div>
+            <div><dt>Branża</dt><dd>{{ selectedClient.industry || 'Brak' }}</dd></div>
+            <div><dt>Wielkość</dt><dd>{{ selectedClient.size || 'Brak' }}</dd></div>
+            <div><dt>E-mail</dt><dd>@if (selectedClient.email) { <a [href]="'mailto:' + selectedClient.email">{{ selectedClient.email }}</a> } @else { Brak }</dd></div>
+            <div><dt>Telefon</dt><dd>@if (selectedClient.phone) { <a [href]="'tel:' + selectedClient.phone">{{ selectedClient.phone }}</a> } @else { Brak }</dd></div>
+            <div><dt>Data dodania</dt><dd>{{ (selectedClient.createdAt?.toDate() | date:'dd.MM.yyyy HH:mm') || 'Brak' }}</dd></div>
+            <div><dt>Ostatnia aktywność</dt><dd>{{ (selectedClient.lastActivity | date:'dd.MM.yyyy') || 'Brak' }}</dd></div>
+            <div><dt>Follow-up</dt><dd>{{ selectedClient.followUp || 'Brak' }} @if (isDue(selectedClient)) { <strong>— do kontaktu</strong> }</dd></div>
+            <div><dt>Status</dt><dd>
+              @if (selectedClient.status === 'X') { <span class="status-icon refused" role="img" aria-label="Odmowa" title="Odmowa">✕</span> }
+              @else if (selectedClient.status === 'V') { <span class="status-icon interested" role="img" aria-label="Zainteresowany" title="Zainteresowany">✓</span> }
+              @else { <span aria-label="Brak statusu">—</span> }
+            </dd></div>
+            <div class="full"><dt>Notatki</dt><dd class="notes">{{ selectedClient.notes || 'Brak' }}</dd></div>
+          </dl>
+        </section>
+        <section class="card">
+          <h2>Aktywności</h2>
+          <form (ngSubmit)="addActivity()" class="form-grid activity-form">
+            <label>Rodzaj *
+              <select name="activityType" [(ngModel)]="activityType" required>
+                <option value="">Wybierz rodzaj</option><option value="Telefon">Telefon</option><option value="E-mail">E-mail</option>
+              </select>
+            </label>
+            <label>Data * <input type="date" name="activityDate" [(ngModel)]="activityDate" required></label>
+            <label>Status klienta *
+              <select name="activityStatus" class="status-select" [class.refused]="activityStatus === 'X'" [class.interested]="activityStatus === 'V'" [(ngModel)]="activityStatus" required>
+                <option value="">Wybierz status</option><option value="unchanged">Bez zmiany</option><option class="refused" value="X" aria-label="Odmowa" title="Odmowa">✕</option><option class="interested" value="V" aria-label="Zainteresowany" title="Zainteresowany">✓</option>
+              </select>
+            </label>
+            <label class="full">Notatka * <textarea name="activityNotes" [(ngModel)]="activityNotes" rows="2" required></textarea></label>
+            <button type="submit" class="full activity-submit" [disabled]="busy()">Dodaj aktywność</button>
+          </form>
+          <ul class="activity-list">
+            @for (activity of activities(); track activity.id) {
+              <li><strong>{{ activity.type || 'Bez rodzaju' }}</strong> — {{ (activity.date | date:'dd.MM.yyyy') || 'Brak daty' }}
+                @if (activity.status === 'X') { <span class="status-icon refused" role="img" aria-label="Odmowa" title="Odmowa">✕</span> }
+                @else if (activity.status === 'V') { <span class="status-icon interested" role="img" aria-label="Zainteresowany" title="Zainteresowany">✓</span> }
+                @if (activity.notes) { <p>{{ activity.notes }}</p> }
+              </li>
+            } @empty {
+              <li>Brak aktywności.</li>
+            }
+          </ul>
+        </section>
+      }
+    }
+  }
+</section>

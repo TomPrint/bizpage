@@ -49,6 +49,12 @@ import { SeoService } from '../seo.service';
         <div class="social-details">
           <h3>{{ t('contact.socialMedia') }}</h3>
           <div class="social-links">
+            <a class="contact-email" href="https://www.facebook.com/WickyWave/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg class="contact-email-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.51 1.49-3.89 3.78-3.89 1.09 0 2.23.19 2.23.19v2.46h-1.26c-1.25 0-1.64.78-1.64 1.57V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z" />
+              </svg>
+              <span>Facebook</span>
+            </a>
             <a class="contact-email" href="https://www.linkedin.com/company/wicky-wave-sp-z-o-o" target="_blank" rel="noopener noreferrer" [attr.aria-label]="t('contact.linkedin')">
               <svg class="contact-email-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.74H4.97V9.2h2.96v9.54ZM6.45 7.9a1.72 1.72 0 1 1 0-3.44 1.72 1.72 0 0 1 0 3.44Zm12.3 10.84h-2.96V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.72H9.5V9.2h2.84v1.3h.04a3.11 3.11 0 0 1 2.8-1.54c3 0 3.56 1.97 3.56 4.53v5.25Z" />

@@ -7,14 +7,14 @@
 
 WickyWave Software designs and delivers custom web applications, including administration panels,
 customer portals, SaaS platforms, AI/ML models, and ERP/CRM integrations. Its active SaaS product
-Mid-Grator adapts wholesaler CSV files to store and business integrations. Xoaila, a product for
-building brand visibility in search engines and AI-generated answers, is in development.
+Mid-Grator adapts wholesaler CSV files to store and business integrations. Xoaila publishes
+structured company data in formats understandable to search engines and AI systems.
 
 ## Pages
 
 - [Home](https://wickywave.pl/en): overview of services, the delivery process, and the technology stack.
 - [Services](https://wickywave.pl/en#uslugi): web applications, websites (landing pages), administration panels, automation, API integrations, and post-launch support.
-- [SaaS products](https://wickywave.pl/en/aktywne-saas): active Mid-Grator and upcoming Xoaila.
+- [SaaS products](https://wickywave.pl/en/aktywne-saas): active Xoaila and Mid-Grator services.
 - [Contact](https://wickywave.pl/en/contact): contact details, email kontakt@wickywave.pl, phone 516 551 316 / 500 083 971.
 - [Privacy policy](https://wickywave.pl/en/privacy-policy): rules for processing personal data and cookies.
 
